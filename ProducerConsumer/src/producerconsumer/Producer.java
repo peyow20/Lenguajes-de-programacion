@@ -23,7 +23,7 @@ public class Producer extends Thread {
         this.sleepProductores = sleepProductores;
         this.tareasPorHacer = tareasPorHacer;
         this.tareasRealizadas = tareasRealizadas;
-        this.stop = stop;
+        this.stop = true;
         
     }
     
@@ -34,7 +34,7 @@ public class Producer extends Thread {
         Random r = new Random(System.currentTimeMillis());
         
         
-        while(stop == true) {
+        while(stop) {
            System.out.println(stop);
            System.out.println(numeroProductores);
            System.out.println(sleepProductores);
@@ -57,6 +57,9 @@ public class Producer extends Thread {
             }
             
         }
+    }
+    public void EndProc(){
+       this.stop = false
     }
     
 }
