@@ -4,40 +4,43 @@ package producerconsumer;
 import java.util.logging.Level;
 import java.util.logging.Logger;
 
+
 public class Buffer {
     
-    private char buffer;
+    private String buffer;
+    private String id;
     
     Buffer() {
-        this.buffer = 0;
+        this.buffer = "";
     }
     
-    synchronized char consume() {
-        char product = 0;
+    synchronized String consume() {
+        String products;
         
-        if(this.buffer == 0) {
+        if(this.buffer == "") {
             try {
                 wait(1000);
             } catch (InterruptedException ex) {
                 Logger.getLogger(Buffer.class.getName()).log(Level.SEVERE, null, ex);
             }
         }
-        product = this.buffer;
-        this.buffer = 0;
+        products = this.buffer;
+        this.buffer = "";
         notify();
         
-        return product;
+        return id;
     }
     
-    synchronized void produce(char product) {
-        if(this.buffer != 0) {
+    synchronized void produce(String products, String id) {
+       this.id = id;
+        if(this.buffer != "") {
             try {
                 wait(1000);
             } catch (InterruptedException ex) {
                 Logger.getLogger(Buffer.class.getName()).log(Level.SEVERE, null, ex);
             }
         }
-        this.buffer = product;
+        this.buffer = products;
         
         notify();
     }

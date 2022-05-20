@@ -1,3 +1,4 @@
+
 package producerconsumer;
 
 
@@ -11,26 +12,25 @@ public class Consumer extends Thread {
     int numeroConsumidores, sleepConsumidores, id;
     HashMap <String,String> tareasPorHacer;
     HashMap <String,String> tareasRealizadas;
+    boolean stop;
     
     
-    Consumer(Buffer buffer, int numeroConsumidores, int sleepConsumidores, HashMap <String,String> tareasPorHacer,HashMap <String,String> tareasRealizadas, int id ) {
+    Consumer(Buffer buffer, int numeroConsumidores, int sleepConsumidores, HashMap <String,String> tareasPorHacer,HashMap <String,String> tareasRealizadas, int id, boolean stop) {
         this.buffer = buffer;
         this.numeroConsumidores = numeroConsumidores;
         this.sleepConsumidores = sleepConsumidores;
         this.tareasPorHacer = tareasPorHacer;
         this.tareasRealizadas = tareasRealizadas;
         this.id = id;
-    }
- 
-    public void st(){
-    this.stop();
-    }
+        this.stop = stop;
+   }
     @Override
     public void run() {
         System.out.println("Running Consumer...");
         String product;
-        
-        for(int i=0 ;; i++) {
+        System.out.println(numeroConsumidores);
+        while(stop == true) {
+            
             product = this.buffer.consume();
             System.out.println("Consumer consumed: " + product);
             
@@ -39,6 +39,7 @@ public class Consumer extends Thread {
             } catch (InterruptedException ex) {
                 Logger.getLogger(Producer.class.getName()).log(Level.SEVERE, null, ex);
             }
+            
         }
     }
 }
