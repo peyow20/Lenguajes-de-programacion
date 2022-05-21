@@ -307,74 +307,100 @@ private static ProducerConsumer producerConsumer;
         pack();
     }// </editor-fold>//GEN-END:initComponents
 
-    private void jButton1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton1ActionPerformed
+     private void jButton1ActionPerformed(java.awt.event.ActionEvent evt) {                                         
         // TODO add your handling code here:
-    }//GEN-LAST:event_jButton1ActionPerformed
+    }                                        
 
-    private void jSpinner1KeyPressed(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_jSpinner1KeyPressed
+    private void jSpinner1KeyPressed(java.awt.event.KeyEvent evt) {                                     
+        int value = (Integer)jSpinner1.getValue();
+        if(value >= 1 && value <= 10)
+        {
+           producerConsumer.setnumeroProductores(value);
+           System.out.println(value);
+        }
+        else {
+            accept = false;
+        } 
+    }                                    
+
+    private void jSpinner2KeyPressed(java.awt.event.KeyEvent evt) {                                     
         int value = evt.getKeyChar() - 48;
         if(value >= 1 && value <= 10)
         {
-            producerConsumer.setnumeroProductores(value);
+            
+        }
+        else {
+            accept = false;
         }
         
-    }//GEN-LAST:event_jSpinner1KeyPressed
+    }                                    
 
-    private void jSpinner2KeyPressed(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_jSpinner2KeyPressed
+    private void jTextField1KeyPressed(java.awt.event.KeyEvent evt) {                                       
         int value = evt.getKeyChar() - 48;
-        if(value >= 1 && value <= 10)
+        if(value >= 0 && value <= 10000)
         {
-            producerConsumer.setnumeroConsumidores(value);
+            producerConsumer.setsleepProductores(producerConsumer.getsleepProductores()* 10 + value);
+        } 
+        else {
+            accept = false;
         }
-    }//GEN-LAST:event_jSpinner2KeyPressed
+        //System.out.println(producerConsumer.getsleepProductores());
+    }                                      
 
-    private void jTextField1KeyPressed(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_jTextField1KeyPressed
+    private void jTextField2KeyPressed(java.awt.event.KeyEvent evt) {                                       
         int value = evt.getKeyChar() - 48;
         if(value >= 0 && value <= 10000)
         {
-            producerConsumer.setsleepProductores(value);
+              producerConsumer.setsleepConsumidores((producerConsumer.getsleepConsumidores())* 10 + value);
         }        
-    }//GEN-LAST:event_jTextField1KeyPressed
+          else {
+            accept = false;
+        }
+    }                                      
 
-    private void jTextField2KeyPressed(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_jTextField2KeyPressed
-        int value = evt.getKeyChar() - 48;
-        if(value >= 0 && value <= 10000)
-        {
-            producerConsumer.setsleepConsumidores(value);
-        }        
-      
-    }//GEN-LAST:event_jTextField2KeyPressed
-
-    private void jTextField3KeyPressed(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_jTextField3KeyPressed
+    private void jTextField3KeyPressed(java.awt.event.KeyEvent evt) {                                       
         int value = evt.getKeyChar() - 48;
         if(value >= 1 && value <= 100)
         {
-            producerConsumer.setsizeBuffer(value);
+           producerConsumer.settamanoBuffer(value);
         }        
+        else {
+            accept = false;
+        }
+        //System.out.println(value);
               
-    }//GEN-LAST:event_jTextField3KeyPressed
+    }                                      
 
-    private void jTextField4KeyPressed(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_jTextField4KeyPressed
+    private void jTextField4KeyPressed(java.awt.event.KeyEvent evt) {                                       
       
   
-    }//GEN-LAST:event_jTextField4KeyPressed
+    }                                      
 
-    private void jSpinner3KeyPressed(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_jSpinner3KeyPressed
+    private void jSpinner3KeyPressed(java.awt.event.KeyEvent evt) {                                     
         int value = evt.getKeyChar() - 48;
         if(value >= 0 && value <= 9)
         {
-            producerConsumer.setrangoValores(value);
+            
         }        
+        else {
+            accept = false;
+        }
       
-    }//GEN-LAST:event_jSpinner3KeyPressed
+    }                                    
 
-    private void jButton1MouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_jButton1MouseClicked
+    private void jButton2ActionPerformed(java.awt.event.ActionEvent evt) {                                         
+        // TODO add your handling code here:
+    }                                        
+
+    private void jButton2MouseClicked(java.awt.event.MouseEvent evt) {                                      
+        producerConsumer.stop();
+    }                                     
+
+    private void jButton1MouseClicked(java.awt.event.MouseEvent evt) {                                      
+        
         producerConsumer.start();
-    }//GEN-LAST:event_jButton1MouseClicked
-
-    private void jButton2KeyPressed(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_jButton2KeyPressed
-       producerConsumer.setStop(false);
-    }//GEN-LAST:event_jButton2KeyPressed
+        
+    }                                     
 
     /**
      * @param args the command line arguments
