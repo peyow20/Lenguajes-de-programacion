@@ -22,14 +22,14 @@ public class Consumer extends Thread {
         this.tareasPorHacer = tareasPorHacer;
         this.tareasRealizadas = tareasRealizadas;
         this.id = id;
-        this.stop = stop;
+        this.stop = true;
    }
     @Override
     public void run() {
         System.out.println("Running Consumer...");
         String product;
         System.out.println(numeroConsumidores);
-        while(stop == true) {
+        while(stop) {
             
             product = this.buffer.consume();
             System.out.println("Consumer consumed: " + product);
@@ -41,5 +41,9 @@ public class Consumer extends Thread {
             }
             
         }
+    }
+    
+    public void ApagarProcesos(){
+        this.stop = false;
     }
 }
