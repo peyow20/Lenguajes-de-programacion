@@ -9,17 +9,20 @@ public class Buffer {
     
     private String buffer;
     private String id;
+    private int size;
     
-    Buffer() {
+    Buffer(int size) {
         this.buffer = "";
+        this.size = size;
+        
     }
     
     synchronized String consume() {
         String products;
         
-        if(this.buffer == "") {
+        while(this.buffer == "") {
             try {
-                wait(1000);
+                wait();
             } catch (InterruptedException ex) {
                 Logger.getLogger(Buffer.class.getName()).log(Level.SEVERE, null, ex);
             }
@@ -33,7 +36,7 @@ public class Buffer {
     
     synchronized void produce(String products, String id) {
        this.id = id;
-        if(this.buffer != "") {
+        while(this.buffer != "") {
             try {
                 wait(1000);
             } catch (InterruptedException ex) {
@@ -49,6 +52,11 @@ public class Buffer {
     synchronized static void print(String string) {
         System.out.print(count++ + " ");
         System.out.println(string);
+    }
+    
+     public void Restart(){
+        count = 1;
+        //agregar boton de reinicio gui.();
     }
     
 }
