@@ -307,7 +307,7 @@ private static ProducerConsumer producerConsumer;
         pack();
     }// </editor-fold>//GEN-END:initComponents
 
-       private void jButton1ActionPerformed(java.awt.event.ActionEvent evt) {                                         
+    private void jButton1ActionPerformed(java.awt.event.ActionEvent evt) {                                         
         // TODO add your handling code here:
     }                                        
 
@@ -321,14 +321,7 @@ private static ProducerConsumer producerConsumer;
     }                                    
 
     private void jTextField1KeyPressed(java.awt.event.KeyEvent evt) {                                       
-        int value = evt.getKeyChar() - 48;
-        if(value >= 0 && value <= 10000)
-        {
-            producerConsumer.setsleepProductores(producerConsumer.getsleepProductores()* 10 + value);
-        } 
-        else {
-            accept = false;
-        }
+
         //System.out.println(producerConsumer.getsleepProductores());
     }                                      
 
@@ -348,14 +341,7 @@ private static ProducerConsumer producerConsumer;
     }                                      
 
     private void jSpinner3KeyPressed(java.awt.event.KeyEvent evt) {                                     
-        int value = evt.getKeyChar() - 48;
-        if(value >= 0 && value <= 9)
-        {
-            
-        }        
-        else {
-            accept = false;
-        }
+
       
     }                                    
 
@@ -364,34 +350,47 @@ private static ProducerConsumer producerConsumer;
     }                                        
 
     private void jButton2MouseClicked(java.awt.event.MouseEvent evt) {                                      
+        if (accept == false){
         producerConsumer.stop();
+        }
     }                                     
 
     private void jButton1MouseClicked(java.awt.event.MouseEvent evt) {                                      
         
-          producerConsumer.start();
+        producerConsumer.start();
         int value = (Integer) jSpinner1.getValue();
         if(value >= 1 && value <= 10)
         {
            producerConsumer.setnumeroProductores(value);
+           //System.out.println(value);
            value = (Integer) jSpinner2.getValue();
            if(value >= 1 && value <= 10)
           {
             producerConsumer.setnumeroConsumidores(value);
+            //System.out.println(value);
             value = Integer.parseInt(jTextField1.getText());;
             if(value >= 0 && value <= 10000)
            {
               producerConsumer.setsleepProductores(producerConsumer.getsleepProductores()* 10 + value);
+              //System.out.println(value);
               value = Integer.parseInt(jTextField2.getText());
               if(value >= 0 && value <= 10000)
               {
                 producerConsumer.setsleepConsumidores((producerConsumer.getsleepConsumidores())* 10 + value);
-              } 
-              value = Integer.parseInt(jTextField3.getText());
+                //System.out.println(value);
+                value = Integer.parseInt(jTextField3.getText()); 
                 if(value >= 1 && value <= 100)
                 {
                   producerConsumer.settamanoBuffer(value);
-                } 
+                  //System.out.println(value);
+                  value = (Integer) jSpinner3.getValue();
+                  if(value >= 0 && value <= 9)
+                  {
+                    producerConsumer.setrangoValores(value);
+                    //System.out.println(value);
+                  } 
+                }
+              }
             }
           }
         }
@@ -399,7 +398,6 @@ private static ProducerConsumer producerConsumer;
             accept = false;
         }        
     }                                     
-                                 
 
     /**
      * @param args the command line arguments
