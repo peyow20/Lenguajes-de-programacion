@@ -3,33 +3,31 @@ package producerconsumer;
 import java.util.HashMap;
 
 
-
-public class ProducerConsumer extends Producer {
+public class ProducerConsumer {
     
-    protected int numeroConsumidores, numeroProductores, sleepProductores, sleepConsumidores, sizeBuffer, rangoValores;
-    protected String operadores;
-    protected Buffer buffer;
-    protected Consumer consumer;
-    protected Producer producer;
-    protected HashMap <String,String> tareasPorHacer;
-    protected HashMap <String,String> tareasRealizadas;
-    protected int id;
-    protected boolean stop = true;
+    private int numeroConsumidores, numeroProductores, sleepProductores, sleepConsumidores, tamanoBuffer, valorN, valorM;
+    private String operadores;
+    private Buffer buffer;
+    private Consumer consumer;
+    private Producer producer;
+    private HashMap <String,String> tareasPorHacer;
+    private HashMap <String,String> tareasRealizadas;
     
-    public void setStop(boolean stop)
-    {
-        this.stop = stop;
-    }
+    
     public void setoperadores(String operadores){
         this.operadores = operadores;
     }
-    public void setsizeBuffer(int sizeBuffer)
+    public void settamanoBuffer(int tamanoBuffer)
     {
-        this.sizeBuffer = sizeBuffer;
+        this.tamanoBuffer = tamanoBuffer;
     }
-    public void setrangoValores(int rangoValores)
+    public void setvalorN(int valorN)
     {
-        this.rangoValores = rangoValores;
+        this.valorN = valorN;
+    }
+    public void setvalorM(int valorM)
+    {
+        this.valorM = valorM;
     }
     public void setnumeroConsumidores(int numeroConsumidores){
         this.numeroConsumidores = numeroConsumidores;
@@ -61,40 +59,40 @@ public class ProducerConsumer extends Producer {
     {
         return this.sleepProductores;
     }
-        public int getSizeBuffer()
+        public int gettamanoBuffer()
     {
-         return this.sizeBuffer;
+         return this.tamanoBuffer;
     }
-    public int getrangoValores()
+    public int getvalorN()
     {
-        return this.rangoValores;
-    }  
+        return this.valorN;
+    }
+    public int getvalorM()
+    {
+        return this.valorM;
+    } 
     public String getoperadores()
     {
         return this.operadores;
-    }
-    public boolean getStop()
-    {
-        return this.stop;
     }
     
     ProducerConsumer(){
             
     }
-
     public void start() {
-    
      tareasPorHacer = new HashMap <String,String>();
      tareasRealizadas = new HashMap <String,String>();
      
      buffer = new Buffer();
         
-     producer = new Producer(buffer, this.numeroProductores, this.sleepProductores, tareasPorHacer, tareasRealizadas, this.stop);
+     producer = new Producer(buffer, this.numeroProductores, this.sleepProductores, tareasPorHacer, tareasRealizadas);
         producer.start();
         
-     consumer = new Consumer(buffer, this.numeroConsumidores, this.sleepConsumidores, tareasPorHacer, tareasRealizadas, id, this.stop);
+     consumer = new Consumer(buffer, this.numeroConsumidores, this.sleepConsumidores, tareasPorHacer, tareasRealizadas);
         consumer.start();
     }
-
-      
+    public void stop(){
+        producer.stop();
+        consumer.stop();
+    }
 }
