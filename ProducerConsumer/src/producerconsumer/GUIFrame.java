@@ -506,18 +506,9 @@ public class GUIFrame extends javax.swing.JFrame {
             consumer[i].Apagar();
         }
         
-        DefaultTableModel modelo = (DefaultTableModel) jTable1.getModel();
-        modelo.setRowCount(0);
         
-        DefaultTableModel modelo2 = (DefaultTableModel) jTable2.getModel();
-        modelo2.setRowCount(0);
         
         buffer.Restart();
-            
-        jButton2.setEnabled(false);
-        jButton1.setEnabled(true);
-        
-        jProgressBar1.setValue(0);
       
       
     }//GEN-LAST:event_jButton2ActionPerformed
