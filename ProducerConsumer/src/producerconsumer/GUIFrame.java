@@ -369,7 +369,7 @@ private static ProducerConsumer producerConsumer;
 
     private void jButton1MouseClicked(java.awt.event.MouseEvent evt) {                                      
         
-        producerConsumer.start();
+          producerConsumer.start();
         int value = (Integer) jSpinner1.getValue();
         if(value >= 1 && value <= 10)
         {
@@ -378,16 +378,16 @@ private static ProducerConsumer producerConsumer;
            if(value >= 1 && value <= 10)
           {
             producerConsumer.setnumeroConsumidores(value);
-            value = (Integer) jTextField1.getValue();
+            value = Integer.parseInt(jTextField1.getText());;
             if(value >= 0 && value <= 10000)
            {
               producerConsumer.setsleepProductores(producerConsumer.getsleepProductores()* 10 + value);
-              value = (Integer) jTextField2.getValue();
+              value = Integer.parseInt(jTextField2.getText());
               if(value >= 0 && value <= 10000)
               {
                 producerConsumer.setsleepConsumidores((producerConsumer.getsleepConsumidores())* 10 + value);
               } 
-              value = (Integer) jTextField3.getValue();
+              value = Integer.parseInt(jTextField3.getText());
                 if(value >= 1 && value <= 100)
                 {
                   producerConsumer.settamanoBuffer(value);
@@ -399,6 +399,7 @@ private static ProducerConsumer producerConsumer;
             accept = false;
         }        
     }                                     
+                                 
 
     /**
      * @param args the command line arguments
