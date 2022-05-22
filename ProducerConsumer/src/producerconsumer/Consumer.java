@@ -4,46 +4,36 @@ package producerconsumer;
 
 import java.util.logging.Level;
 import java.util.logging.Logger;
-import java.util.HashMap;
 
 
 public class Consumer extends Thread {
     Buffer buffer;
-    int numeroConsumidores, sleepConsumidores, id;
-    HashMap <String,String> tareasPorHacer;
-    HashMap <String,String> tareasRealizadas;
-    boolean stop;
+    private final int sleepConsumidores,idConsu;
+    private boolean stop;
     
-    
-    Consumer(Buffer buffer, int numeroConsumidores, int sleepConsumidores, HashMap <String,String> tareasPorHacer,HashMap <String,String> tareasRealizadas, int id, boolean stop) {
+    Consumer(Buffer buffer, int idConsum, int sleepConsumidores) {
         this.buffer = buffer;
-        this.numeroConsumidores = numeroConsumidores;
         this.sleepConsumidores = sleepConsumidores;
-        this.tareasPorHacer = tareasPorHacer;
-        this.tareasRealizadas = tareasRealizadas;
-        this.id = id;
+        this.idConsu = idConsum; 
         this.stop = true;
-   }
+    }
+ 
     @Override
     public void run() {
         System.out.println("Running Consumer...");
         String product;
-        System.out.println(numeroConsumidores);
-        while(stop) {
-            
-            product = this.buffer.consume();
-            System.out.println("Consumer consumed: " + product);
+        while (stop) {
+            System.out.println("Consumer consumed: ");
             
             try {
                 Thread.sleep(sleepConsumidores);
             } catch (InterruptedException ex) {
                 Logger.getLogger(Producer.class.getName()).log(Level.SEVERE, null, ex);
             }
-            
         }
     }
     
-    public void ApagarProcesos(){
+    public void Apagar(){
         this.stop = false;
     }
 }

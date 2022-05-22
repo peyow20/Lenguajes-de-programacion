@@ -4,25 +4,22 @@ package producerconsumer;
 import java.util.Random;
 import java.util.logging.Level;
 import java.util.logging.Logger;
-import java.util.HashMap;
 import java.util.concurrent.ThreadLocalRandom;
 
 
 public class Producer extends Thread {
     Buffer buffer;
-    int numeroProductores, sleepProductores;
-    HashMap <String,String> tareasPorHacer;
-    HashMap <String,String> tareasRealizadas;
-    private static final String symbol = "+-*/";
-    boolean stop;
-
+    private final int sleepProductores2, rangomenor, rangomayor;
+    int id;
+    private boolean stop;
+    private static final String Operations = "+-*/";
     
-    public Producer(Buffer buffer, int numeroProductores, int sleepProductores, HashMap <String,String> tareasPorHacer,HashMap <String,String> tareasRealizadas, boolean stop) {
+    Producer(Buffer buffer, int sleepProductores2, int rangomenor, int rangomayor, int id) {
         this.buffer = buffer;
-        this.numeroProductores = numeroProductores;
-        this.sleepProductores = sleepProductores;
-        this.tareasPorHacer = tareasPorHacer;
-        this.tareasRealizadas = tareasRealizadas;
+        this.sleepProductores2 = sleepProductores2;
+        this.rangomayor = rangomayor;
+        this.rangomenor = rangomenor;
+        this.id = id;
         this.stop = true;
         
     }
@@ -30,36 +27,30 @@ public class Producer extends Thread {
     @Override
     public void run() {
         System.out.println("Running Producer...");
-        String products;
-        Random r = new Random(System.currentTimeMillis());
+        String product;
         
-        
-        while(stop) {
-           System.out.println(stop);
-           System.out.println(numeroProductores);
-           System.out.println(sleepProductores);
-           
-            int num1 = ThreadLocalRandom.current().nextInt(sleepProductores, numeroProductores + 1);
-            int num2 = ThreadLocalRandom.current().nextInt(sleepProductores, numeroProductores + 1);
-            int sym = ThreadLocalRandom.current().nextInt(symbol.length());
+        while (stop) {
+            int symbolmath = ThreadLocalRandom.
+                    current().nextInt(Operations.length());
+            int num1 = ThreadLocalRandom.
+                    current().nextInt(rangomenor, rangomayor + 1);
+            int num2 = ThreadLocalRandom.
+                    current().nextInt(rangomenor, rangomayor + 1);
             
-            products = String.format("(%c %d %d)", symbol.charAt(sym), num1, num2);
-            String jobID = String.valueOf(r.nextInt(numeroProductores));
-            this.buffer.produce(products, jobID);
-            
-            tareasPorHacer.put(jobID, products);
-            System.out.println("Producer produced: " + products);
+            product = String.format("(%c %d %d)", 
+                    Operations.charAt(symbolmath), num1, num2);
+            this.buffer.produce(product, id);
             
             try {
-                Thread.sleep(sleepProductores);
+                Thread.sleep(sleepProductores2);
             } catch (InterruptedException ex) {
                 Logger.getLogger(Producer.class.getName()).log(Level.SEVERE, null, ex);
             }
-            
         }
     }
-    public void EndProc(){
-       this.stop = false
+    
+    public void Terminar(){
+        this.stop = false;
     }
     
 }

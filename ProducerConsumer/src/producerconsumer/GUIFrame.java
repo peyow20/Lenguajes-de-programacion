@@ -8,18 +8,61 @@
  *
  * @author sdegante
  */
+
+
 package producerconsumer;
 
+import javax.swing.table.DefaultTableModel;
+
+
+
+
+
 public class GUIFrame extends javax.swing.JFrame {
-private static ProducerConsumer producerConsumer;
-boolean accept = true, accaptulti;
+    private Integer numeroConsumidores, numeroProductores, sleepProductores, sleepConsumidores, tamanoBuffer, valorN, valorM;
+    private Buffer buffer;
+    private Consumer[] consumer;
+    private Producer[] producer;
+    static private GUIFrame guiH;
+    
     /**
      * Creates new form GUIFrame
      */
     public GUIFrame() {
         initComponents();
+        jButton2.setEnabled(false);
+        jLabel9.setVisible(false);
+
     }
 
+    
+    //Funcion que valide los datos
+    private Boolean valoresvalidos(){
+        boolean accept = true;
+        numeroConsumidores = (Integer) jSpinner2.getValue();
+        numeroProductores = (Integer) jSpinner1.getValue();
+        sleepProductores =  Integer.parseInt(jTextField1.getText());
+        sleepConsumidores = Integer.parseInt(jTextField2.getText());
+        tamanoBuffer = Integer.parseInt(jTextField3.getText());
+        valorN = (Integer) jSpinner5.getValue();
+        valorM = (Integer) jSpinner3.getValue();
+        
+        if((numeroConsumidores > 10 || numeroConsumidores < 0) || 
+                (numeroProductores > 10 || numeroProductores < 0) || 
+                (sleepProductores > 10000 || sleepProductores < 0) ||
+                (sleepConsumidores > 10000 || sleepConsumidores < 0) ||
+                (tamanoBuffer > 100 || tamanoBuffer < 0) || 
+                (valorN > 9 || valorN < 0) || (valorM > 9 || valorM < 0) ||
+                (valorN > valorM)){
+        jLabel9.setVisible(true);
+        accept = false;
+        }
+        
+        return accept;
+    }
+    
+    
+    
     /**
      * This method is called from within the constructor to initialize the form.
      * WARNING: Do NOT modify this code. The content of this method is always
@@ -27,9 +70,38 @@ boolean accept = true, accaptulti;
      */
     @SuppressWarnings("unchecked")
 
-    // <editor-fold defaultstate="collapsed" desc="Generated Code">                          
+    
+    //Agregar Tareas a las tablas
+    public void TareasRealizadas(int id, String tarea, String ans){
+       
+    }
+    
+    public void addTareaPorHacer(int id, String product){        
+      
+    }
+    
+    public void ActualizarProgressBar(int per){
+      
+    }
+    
+     public void completarTareaPorHacer(){
+       
+    }
+     
+    public void ContadorTareasR(){
+        jSpinner4.setValue(0);
+    }
+    // <editor-fold defaultstate="collapsed" desc="Generated Code">//GEN-BEGIN:initComponents
     private void initComponents() {
 
+        jScrollPane5 = new javax.swing.JScrollPane();
+        jTable1 = new javax.swing.JTable();
+        jScrollPane6 = new javax.swing.JScrollPane();
+        jTable2 = new javax.swing.JTable();
+        jScrollPane7 = new javax.swing.JScrollPane();
+        jTable3 = new javax.swing.JTable();
+        jScrollPane8 = new javax.swing.JScrollPane();
+        jTable4 = new javax.swing.JTable();
         jTabbedPane1 = new javax.swing.JTabbedPane();
         jPanel2 = new javax.swing.JPanel();
         jPanel1 = new javax.swing.JPanel();
@@ -48,16 +120,68 @@ boolean accept = true, accaptulti;
         jLabel9 = new javax.swing.JLabel();
         jSpinner5 = new javax.swing.JSpinner();
         jPanel3 = new javax.swing.JPanel();
-        jScrollPane1 = new javax.swing.JScrollPane();
-        jTable1 = new javax.swing.JTable();
-        jScrollPane2 = new javax.swing.JScrollPane();
-        jTable2 = new javax.swing.JTable();
         jLabel7 = new javax.swing.JLabel();
         jLabel8 = new javax.swing.JLabel();
         jProgressBar1 = new javax.swing.JProgressBar();
         jSpinner4 = new javax.swing.JSpinner();
+        jScrollPane9 = new javax.swing.JScrollPane();
+        jTable5 = new javax.swing.JTable();
+        jScrollPane10 = new javax.swing.JScrollPane();
+        jTable6 = new javax.swing.JTable();
         jButton1 = new javax.swing.JButton();
         jButton2 = new javax.swing.JButton();
+
+        jTable1.setModel(new javax.swing.table.DefaultTableModel(
+            new Object [][] {
+                {null, null, null, null},
+                {null, null, null, null},
+                {null, null, null, null},
+                {null, null, null, null}
+            },
+            new String [] {
+                "Title 1", "Title 2", "Title 3", "Title 4"
+            }
+        ));
+        jScrollPane5.setViewportView(jTable1);
+
+        jTable2.setModel(new javax.swing.table.DefaultTableModel(
+            new Object [][] {
+                {null, null, null, null},
+                {null, null, null, null},
+                {null, null, null, null},
+                {null, null, null, null}
+            },
+            new String [] {
+                "Title 1", "Title 2", "Title 3", "Title 4"
+            }
+        ));
+        jScrollPane6.setViewportView(jTable2);
+
+        jTable3.setModel(new javax.swing.table.DefaultTableModel(
+            new Object [][] {
+                {null, null, null, null},
+                {null, null, null, null},
+                {null, null, null, null},
+                {null, null, null, null}
+            },
+            new String [] {
+                "Title 1", "Title 2", "Title 3", "Title 4"
+            }
+        ));
+        jScrollPane7.setViewportView(jTable3);
+
+        jTable4.setModel(new javax.swing.table.DefaultTableModel(
+            new Object [][] {
+                {null, null, null, null},
+                {null, null, null, null},
+                {null, null, null, null},
+                {null, null, null, null}
+            },
+            new String [] {
+                "Title 1", "Title 2", "Title 3", "Title 4"
+            }
+        ));
+        jScrollPane8.setViewportView(jTable4);
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
         setResizable(false);
@@ -186,37 +310,37 @@ boolean accept = true, accaptulti;
 
         jTabbedPane1.addTab("Configuración", jPanel2);
 
-        jTable1.setModel(new javax.swing.table.DefaultTableModel(
-            new Object [][] {
-                {null, null, null, null},
-                {null, null, null, null},
-                {null, null, null, null},
-                {null, null, null, null}
-            },
-            new String [] {
-                "Title 1", "Title 2", "Title 3", "Title 4"
-            }
-        ));
-        jScrollPane1.setViewportView(jTable1);
-
-        jTable2.setModel(new javax.swing.table.DefaultTableModel(
-            new Object [][] {
-                {null, null, null, null},
-                {null, null, null, null},
-                {null, null, null, null},
-                {null, null, null, null}
-            },
-            new String [] {
-                "Title 1", "Title 2", "Title 3", "Title 4"
-            }
-        ));
-        jScrollPane2.setViewportView(jTable2);
-
         jLabel7.setText("Tareas por hacer");
 
         jLabel8.setText("Tareas realizadas");
 
         jProgressBar1.setValue(50);
+
+        jTable5.setModel(new javax.swing.table.DefaultTableModel(
+            new Object [][] {
+                {null, null, null, null},
+                {null, null, null, null},
+                {null, null, null, null},
+                {null, null, null, null}
+            },
+            new String [] {
+                "Title 1", "Title 2", "Title 3", "Title 4"
+            }
+        ));
+        jScrollPane9.setViewportView(jTable5);
+
+        jTable6.setModel(new javax.swing.table.DefaultTableModel(
+            new Object [][] {
+                {null, null, null, null},
+                {null, null, null, null},
+                {null, null, null, null},
+                {null, null, null, null}
+            },
+            new String [] {
+                "Title 1", "Title 2", "Title 3", "Title 4"
+            }
+        ));
+        jScrollPane10.setViewportView(jTable6);
 
         javax.swing.GroupLayout jPanel3Layout = new javax.swing.GroupLayout(jPanel3);
         jPanel3.setLayout(jPanel3Layout);
@@ -224,15 +348,15 @@ boolean accept = true, accaptulti;
             jPanel3Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(jPanel3Layout.createSequentialGroup()
                 .addContainerGap()
-                .addGroup(jPanel3Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING, false)
-                    .addComponent(jProgressBar1, javax.swing.GroupLayout.DEFAULT_SIZE, 185, Short.MAX_VALUE)
-                    .addComponent(jScrollPane1, javax.swing.GroupLayout.Alignment.LEADING, javax.swing.GroupLayout.PREFERRED_SIZE, 0, Short.MAX_VALUE)
-                    .addComponent(jLabel7, javax.swing.GroupLayout.Alignment.LEADING, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
+                .addGroup(jPanel3Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
+                    .addComponent(jScrollPane9, javax.swing.GroupLayout.PREFERRED_SIZE, 0, Short.MAX_VALUE)
+                    .addComponent(jProgressBar1, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.DEFAULT_SIZE, 185, Short.MAX_VALUE)
+                    .addComponent(jLabel7, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
                 .addGap(18, 18, 18)
                 .addGroup(jPanel3Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
-                    .addComponent(jScrollPane2, javax.swing.GroupLayout.PREFERRED_SIZE, 0, Short.MAX_VALUE)
                     .addComponent(jLabel8, javax.swing.GroupLayout.DEFAULT_SIZE, 185, Short.MAX_VALUE)
-                    .addComponent(jSpinner4))
+                    .addComponent(jSpinner4)
+                    .addComponent(jScrollPane10, javax.swing.GroupLayout.DEFAULT_SIZE, 185, Short.MAX_VALUE))
                 .addContainerGap(35, Short.MAX_VALUE))
         );
         jPanel3Layout.setVerticalGroup(
@@ -242,15 +366,15 @@ boolean accept = true, accaptulti;
                 .addGroup(jPanel3Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(jLabel7)
                     .addComponent(jLabel8))
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
-                .addGroup(jPanel3Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
-                    .addComponent(jScrollPane1, javax.swing.GroupLayout.DEFAULT_SIZE, 114, Short.MAX_VALUE)
-                    .addComponent(jScrollPane2, javax.swing.GroupLayout.PREFERRED_SIZE, 0, Short.MAX_VALUE))
+                .addGap(9, 9, 9)
+                .addGroup(jPanel3Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
+                    .addComponent(jScrollPane9, javax.swing.GroupLayout.PREFERRED_SIZE, 117, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(jScrollPane10, javax.swing.GroupLayout.PREFERRED_SIZE, 117, javax.swing.GroupLayout.PREFERRED_SIZE))
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
                 .addGroup(jPanel3Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                     .addComponent(jProgressBar1, javax.swing.GroupLayout.PREFERRED_SIZE, 20, javax.swing.GroupLayout.PREFERRED_SIZE)
                     .addComponent(jSpinner4, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
-                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
+                .addContainerGap(47, Short.MAX_VALUE))
         );
 
         jTabbedPane1.addTab("Procesos", jPanel3);
@@ -288,15 +412,14 @@ boolean accept = true, accaptulti;
         layout.setHorizontalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(layout.createSequentialGroup()
-                .addContainerGap()
+                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                     .addComponent(jTabbedPane1, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                     .addGroup(layout.createSequentialGroup()
                         .addGap(6, 6, 6)
                         .addComponent(jButton1, javax.swing.GroupLayout.PREFERRED_SIZE, 205, javax.swing.GroupLayout.PREFERRED_SIZE)
                         .addGap(18, 18, 18)
-                        .addComponent(jButton2, javax.swing.GroupLayout.PREFERRED_SIZE, 205, javax.swing.GroupLayout.PREFERRED_SIZE)))
-                .addContainerGap(34, Short.MAX_VALUE))
+                        .addComponent(jButton2, javax.swing.GroupLayout.PREFERRED_SIZE, 205, javax.swing.GroupLayout.PREFERRED_SIZE))))
         );
         layout.setVerticalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
@@ -311,117 +434,108 @@ boolean accept = true, accaptulti;
         );
 
         pack();
-    }// </editor-fold>                        
+    }// </editor-fold>//GEN-END:initComponents
 
-    private void jButton1ActionPerformed(java.awt.event.ActionEvent evt) {                                         
+    private void jButton1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton1ActionPerformed
+        Boolean accept = valoresvalidos();
         
-    }                                        
+        if(accept == true){
+            jLabel9.setVisible(false);
+            jButton1.setEnabled(false);
+            jButton2.setEnabled(true);
+            
+            buffer = new Buffer(tamanoBuffer, guiH); 
+            
+            producer = new Producer[numeroProductores];
+            for (int i = 0; i < producer.length; i++)
+            {
+                producer[i] = new Producer(
+                        buffer, sleepProductores, valorN, valorM, i);
+                producer[i].start();    
+            }
+            
+            consumer = new Consumer[numeroConsumidores];
+            for (int i = 0; i < consumer.length; i++)
+            {
+                consumer[i] = new Consumer(buffer, sleepConsumidores,i);   
+                consumer[i].start();
+            }
+              
+            
+        }
+        
+        
+    }//GEN-LAST:event_jButton1ActionPerformed
 
-    private void jSpinner1KeyPressed(java.awt.event.KeyEvent evt) {                                     
+    private void jSpinner1KeyPressed(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_jSpinner1KeyPressed
 
-    }                                    
+    }//GEN-LAST:event_jSpinner1KeyPressed
 
-    private void jSpinner2KeyPressed(java.awt.event.KeyEvent evt) {                                     
+    private void jSpinner2KeyPressed(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_jSpinner2KeyPressed
 
         
-    }                                    
+    }//GEN-LAST:event_jSpinner2KeyPressed
 
-    private void jTextField1KeyPressed(java.awt.event.KeyEvent evt) {                                       
+    private void jTextField1KeyPressed(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_jTextField1KeyPressed
 
    
-    }                                      
+    }//GEN-LAST:event_jTextField1KeyPressed
 
-    private void jTextField2KeyPressed(java.awt.event.KeyEvent evt) {                                       
+    private void jTextField2KeyPressed(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_jTextField2KeyPressed
 
-    }                                      
+    }//GEN-LAST:event_jTextField2KeyPressed
 
-    private void jTextField3KeyPressed(java.awt.event.KeyEvent evt) {                                       
+    private void jTextField3KeyPressed(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_jTextField3KeyPressed
 
 
               
-    }                                      
+    }//GEN-LAST:event_jTextField3KeyPressed
 
-    private void jSpinner3KeyPressed(java.awt.event.KeyEvent evt) {                                     
+    private void jSpinner3KeyPressed(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_jSpinner3KeyPressed
 
       
-    }                                    
+    }//GEN-LAST:event_jSpinner3KeyPressed
 
-    private void jButton2ActionPerformed(java.awt.event.ActionEvent evt) {                                         
+    private void jButton2ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton2ActionPerformed
       jButton1.setEnabled(true);
       jButton2.setEnabled(false);
-    }                                        
-
-    private void jButton2MouseClicked(java.awt.event.MouseEvent evt) {                                      
-        producerConsumer.stop();
-    }                                     
-
-    private void jButton1MouseClicked(java.awt.event.MouseEvent evt) {                                      
-        
-        producerConsumer.start();
-        int value = (Integer) jSpinner1.getValue();
-        if(value >= 1 && value <= 10)
-        {
-           producerConsumer.setnumeroProductores((Integer) jSpinner1.getValue());
-           System.out.println(value);
-           value = (Integer) jSpinner2.getValue();
-           if(value >= 1 && value <= 10)
-          {
-            producerConsumer.setnumeroConsumidores(value);
-            System.out.println(value);
-            value = Integer.parseInt(jTextField1.getText());
-            if(value >= 0 && value <= 10000)
-           {
-              producerConsumer.setsleepProductores(producerConsumer.getsleepProductores()* 10 + value);
-              System.out.println(value);
-              value = Integer.parseInt(jTextField2.getText());
-              if(value >= 0 && value <= 10000)
-              {
-                producerConsumer.setsleepConsumidores((producerConsumer.getsleepConsumidores())* 10 + value);
-                System.out.println(value);
-                value = Integer.parseInt(jTextField3.getText()); 
-                if(value >= 1 && value <= 100)
-                {
-                  producerConsumer.settamanoBuffer(value);
-                  System.out.println(value);
-                  value = (Integer) jSpinner5.getValue();
-                  int value2 = (Integer) jSpinner3.getValue();
-                  if((value >= 0 && value <= 9) && (value >= 0 && value <= 9) && (value2 > value))
-                  {
-                    producerConsumer.setvalorM(value2);
-                    producerConsumer.setvalorN(value);
-                    System.out.println(value);
-                    System.out.println(value2);
-                  }
-                  else {
-                      jLabel9.setVisible(true);
-                  }
-                }
-                else {
-                    jLabel9.setVisible(true);
-                }
-              }
-              else {
-                  jLabel9.setVisible(true);
-              }
-            }
-            else{
-                jLabel9.setVisible(true);
-            }
-          }
-           else{
-               jLabel9.setVisible(true);
-           }
+      for(int i = 0; i < producer.length; i++){
+            producer[i].Terminar();
         }
-        else{
-            jLabel9.setVisible(true);
-        }        
-    }                                     
+        for(int i =0; i < consumer.length; i++){
+            consumer[i].Apagar();
+        }
+        
+        DefaultTableModel modelo = (DefaultTableModel) jTable1.getModel();
+        modelo.setRowCount(0);
+        
+        DefaultTableModel modelo2 = (DefaultTableModel) jTable2.getModel();
+        modelo2.setRowCount(0);
+        
+        buffer.Restart();
+            
+        jButton2.setEnabled(false);
+        jButton1.setEnabled(true);
+        
+        jProgressBar1.setValue(0);
+      
+      
+    }//GEN-LAST:event_jButton2ActionPerformed
 
+    private void jButton2MouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_jButton2MouseClicked
+
+    }//GEN-LAST:event_jButton2MouseClicked
+
+    private void jButton1MouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_jButton1MouseClicked
+        
+               
+    }//GEN-LAST:event_jButton1MouseClicked
+
+    
     /**
      * @param args the command line arguments
      */
     public static void main(String args[]) {
-       producerConsumer = new ProducerConsumer();
         /* Set the Nimbus look and feel */
         //<editor-fold defaultstate="collapsed" desc=" Look and feel setting code (optional) ">
         /* If Nimbus (introduced in Java SE 6) is not available, stay with the default look and feel.
@@ -448,12 +562,14 @@ boolean accept = true, accaptulti;
         /* Create and display the form */
         java.awt.EventQueue.invokeLater(new Runnable() {
             public void run() {
+                GUIFrame gui = new GUIFrame();
                 new GUIFrame().setVisible(true);
+                guiH = gui;
             }
         });
     }
 
-    // Variables declaration - do not modify                     
+    // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JButton jButton1;
     private javax.swing.JButton jButton2;
     private javax.swing.JLabel jLabel1;
@@ -469,8 +585,12 @@ boolean accept = true, accaptulti;
     private javax.swing.JPanel jPanel2;
     private javax.swing.JPanel jPanel3;
     private javax.swing.JProgressBar jProgressBar1;
-    private javax.swing.JScrollPane jScrollPane1;
-    private javax.swing.JScrollPane jScrollPane2;
+    private javax.swing.JScrollPane jScrollPane10;
+    private javax.swing.JScrollPane jScrollPane5;
+    private javax.swing.JScrollPane jScrollPane6;
+    private javax.swing.JScrollPane jScrollPane7;
+    private javax.swing.JScrollPane jScrollPane8;
+    private javax.swing.JScrollPane jScrollPane9;
     private javax.swing.JSpinner jSpinner1;
     private javax.swing.JSpinner jSpinner2;
     private javax.swing.JSpinner jSpinner3;
@@ -479,8 +599,12 @@ boolean accept = true, accaptulti;
     private javax.swing.JTabbedPane jTabbedPane1;
     private javax.swing.JTable jTable1;
     private javax.swing.JTable jTable2;
+    private javax.swing.JTable jTable3;
+    private javax.swing.JTable jTable4;
+    private javax.swing.JTable jTable5;
+    private javax.swing.JTable jTable6;
     private javax.swing.JTextField jTextField1;
     private javax.swing.JTextField jTextField2;
     private javax.swing.JTextField jTextField3;
-    // End of variables declaration                   
+    // End of variables declaration//GEN-END:variables
 }
