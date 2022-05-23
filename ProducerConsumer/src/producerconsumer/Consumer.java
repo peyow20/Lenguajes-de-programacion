@@ -7,24 +7,25 @@ import java.util.logging.Logger;
 
 
 public class Consumer extends Thread {
+    //Variables de Consumer
     Buffer buffer;
     private final int sleepConsumidores,idConsu;
     private boolean stop;
-    
-    Consumer(Buffer buffer, int idConsum, int sleepConsumidores) {
+    //Constructor de Consumer
+    Consumer(Buffer buffer, int idConsu, int sleepConsumidores) {
         this.buffer = buffer;
         this.sleepConsumidores = sleepConsumidores;
-        this.idConsu = idConsum; 
+        this.idConsu = idConsu; 
         this.stop = true;
     }
  
     @Override
     public void run() {
         System.out.println("Running Consumer...");
-        String product;
+
         while (stop) {
-            System.out.println("Consumer consumed: ");
-            
+            //Llama el metodo de consume en la clase Buffer
+            this.buffer.consume(idConsu);
             try {
                 Thread.sleep(sleepConsumidores);
             } catch (InterruptedException ex) {
@@ -32,7 +33,7 @@ public class Consumer extends Thread {
             }
         }
     }
-    
+    //Stop de Consumer
     public void Apagar(){
         this.stop = false;
     }

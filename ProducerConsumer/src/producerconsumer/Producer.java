@@ -8,12 +8,13 @@ import java.util.concurrent.ThreadLocalRandom;
 
 
 public class Producer extends Thread {
+    //Variables de Producer
     Buffer buffer;
     private final int sleepProductores2, rangomenor, rangomayor;
     int id;
     private boolean stop;
     private static final String Operations = "+-*/";
-    
+    //Constructor Producer
     Producer(Buffer buffer, int sleepProductores2, int rangomenor, int rangomayor, int id) {
         this.buffer = buffer;
         this.sleepProductores2 = sleepProductores2;
@@ -30,6 +31,7 @@ public class Producer extends Thread {
         String product;
         
         while (stop) {
+            //Creamos al azar un producto
             int symbolmath = ThreadLocalRandom.
                     current().nextInt(Operations.length());
             int num1 = ThreadLocalRandom.
@@ -37,8 +39,9 @@ public class Producer extends Thread {
             int num2 = ThreadLocalRandom.
                     current().nextInt(rangomenor, rangomayor + 1);
             
-            product = String.format("(%c %d %d)", 
-                    Operations.charAt(symbolmath), num1, num2);
+            product = String.format("(%c %d %d)", Operations.charAt(symbolmath), num1, num2);
+            //Mandamos el Producto a la clase Buffer
+
             this.buffer.produce(product, id);
             
             try {
@@ -48,7 +51,7 @@ public class Producer extends Thread {
             }
         }
     }
-    
+    //Stop Producer
     public void Terminar(){
         this.stop = false;
     }
