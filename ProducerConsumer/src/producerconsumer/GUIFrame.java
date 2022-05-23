@@ -79,6 +79,7 @@ public class GUIFrame extends javax.swing.JFrame {
         tableProd.addRow(Dato);
 
         jTable5.setModel(tableProd);
+        ActualizarProgressBar();
     }
     public void TareasRealizadas(int id, String tarea, String ans){
         
@@ -98,6 +99,7 @@ public class GUIFrame extends javax.swing.JFrame {
         public void completarTareaPorHacer(){
         DefaultTableModel tableCons = (DefaultTableModel)jTable5.getModel();
         tableCons.removeRow(0);
+        ActualizarProgressBar();
     }
 
     
