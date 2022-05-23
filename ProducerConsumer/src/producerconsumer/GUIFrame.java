@@ -22,6 +22,7 @@ public class GUIFrame extends javax.swing.JFrame {
     private Consumer[] consumer;
     private Producer[] producer;
     
+    
 
     /**
      * Creates new form GUIFrame
@@ -31,6 +32,7 @@ public class GUIFrame extends javax.swing.JFrame {
         //Seteo interfaz innecesaria
         jButton2.setEnabled(false);
         jLabel9.setVisible(false);
+        jProgressBar1.setValue(0);
         //Seteo de las tablas
     }
     //Funcion que valide los datos
@@ -90,6 +92,7 @@ public class GUIFrame extends javax.swing.JFrame {
         tableCons.addRow(DatoC);
         
         jSpinner4.setValue((Integer) jSpinner4.getValue() + 1);
+        ActualizarProgressBar();
 
     }
         public void completarTareaPorHacer(){
@@ -98,8 +101,8 @@ public class GUIFrame extends javax.swing.JFrame {
     }
 
     
-    public void ActualizarProgressBar(int per){
-      
+    public void ActualizarProgressBar(){
+        jProgressBar1.setValue((Integer) jSpinner4.getValue());
     }
      
     public void ContadorTareasR(){
@@ -448,6 +451,8 @@ public class GUIFrame extends javax.swing.JFrame {
     private void jButton2ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton2ActionPerformed
       jButton1.setEnabled(true);
       jButton2.setEnabled(false);
+      
+      
       for(int i = 0; i < producer.length; i++){
             producer[i].Terminar();
         }
