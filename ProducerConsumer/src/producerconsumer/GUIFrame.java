@@ -15,17 +15,14 @@ package producerconsumer;
 import javax.swing.table.DefaultTableModel;
 
 
-
-
-
 public class GUIFrame extends javax.swing.JFrame {
     //Declaracion de variables
     private Integer numeroConsumidores, numeroProductores, sleepProductores, sleepConsumidores, tamanoBuffer, valorN, valorM;
     private Buffer buffer;
     private Consumer[] consumer;
     private Producer[] producer;
-    static private GUIFrame guiH;
     
+
     /**
      * Creates new form GUIFrame
      */
@@ -34,10 +31,8 @@ public class GUIFrame extends javax.swing.JFrame {
         //Seteo interfaz innecesaria
         jButton2.setEnabled(false);
         jLabel9.setVisible(false);
-
+        //Seteo de las tablas
     }
-
-    
     //Funcion que valide los datos
     private Boolean valoresvalidos(){
         boolean accept = true;
@@ -74,22 +69,37 @@ public class GUIFrame extends javax.swing.JFrame {
 
     
     //Tablas para outputs
-    public void TareasRealizadas(int id, String tarea, String ans){
+        public void addTareaPorHacer(int id, String product){  
+        DefaultTableModel tableProd = (DefaultTableModel)jTable5.getModel();
+        String Dato[] = new String [2];
+        Dato[0] = String.valueOf(id);
+        Dato[1] = product;
+        tableProd.addRow(Dato);
 
+        jTable5.setModel(tableProd);
+    }
+    public void TareasRealizadas(int id, String tarea, String ans){
+        
+        DefaultTableModel tableCons = (DefaultTableModel)jTable6.getModel();
+
+        String DatoC[] = new String [3];
+        DatoC[0] = String.valueOf(id);
+        DatoC[1] = tarea;
+        DatoC[2] = ans;
+        
+        tableCons.addRow(DatoC);
+        
         jSpinner4.setValue((Integer) jSpinner4.getValue() + 1);
-    
+
     }
-    
-    public void addTareaPorHacer(int id, String product){  
-     
+        public void completarTareaPorHacer(){
+        DefaultTableModel tableCons = (DefaultTableModel)jTable5.getModel();
+        tableCons.removeRow(0);
     }
+
     
     public void ActualizarProgressBar(int per){
       
-    }
-    
-     public void completarTareaPorHacer(){
-       
     }
      
     public void ContadorTareasR(){
@@ -288,21 +298,21 @@ public class GUIFrame extends javax.swing.JFrame {
         jProgressBar1.setValue(50);
 
         jTable5.setModel(new javax.swing.table.DefaultTableModel(
-            new Object [][]{
+            new Object [][] {
 
             },
             new String [] {
-                "ID del productor", "Producto"
+                "idProducer", "Product"
             }
         ));
         jScrollPane3.setViewportView(jTable5);
 
         jTable6.setModel(new javax.swing.table.DefaultTableModel(
-            new Object [][]{
+            new Object [][] {
 
             },
             new String [] {
-                "IdConsumidor", "Cosume", "Resultado"
+                "idConsumer", "Consume", "Respuesta"
             }
         ));
         jScrollPane4.setViewportView(jTable6);
@@ -408,15 +418,14 @@ public class GUIFrame extends javax.swing.JFrame {
             jButton2.setEnabled(true);
             
             //Seteo de objeto buffer, manda tama;o e interfaz
-            buffer = new Buffer(tamanoBuffer, guiH); 
+            buffer = new Buffer(tamanoBuffer, this); 
             
             //Seteo de objeto Producer como un arreglo
             producer = new Producer[numeroProductores];
             for (int i = 0; i < producer.length; i++)
             {
                 //Seteo de objeto Producer dentro del array de producer[] 
-                producer[i] = new Producer(
-                        buffer, sleepProductores, valorN, valorM, i);
+                producer[i] = new Producer(buffer, sleepProductores, valorN, valorM, i);
                 //Inicio de Proceso de Producer
                 producer[i].start();    
             }
@@ -445,7 +454,12 @@ public class GUIFrame extends javax.swing.JFrame {
         for(int i =0; i < consumer.length; i++){
             consumer[i].Apagar();
         }
-        
+       DefaultTableModel tableProducer = (DefaultTableModel) jTable5.getModel();
+       DefaultTableModel tableConsumer = (DefaultTableModel) jTable6.getModel();
+       
+       tableProducer.setRowCount(0);
+       tableConsumer.setRowCount(0);
+       
         buffer.Restart();
       
     }//GEN-LAST:event_jButton2ActionPerformed
@@ -485,7 +499,7 @@ public class GUIFrame extends javax.swing.JFrame {
                 GUIFrame gui = new GUIFrame();
                 new GUIFrame().setVisible(true);
                 //Inicializacion de la interfaz
-                guiH = gui;
+                
             }
         });
     }

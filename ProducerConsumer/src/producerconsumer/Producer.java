@@ -42,7 +42,7 @@ public class Producer extends Thread {
             product = String.format("(%c %d %d)", Operations.charAt(symbolmath), num1, num2);
             //Mandamos el Producto a la clase Buffer
 
-            this.buffer.produce(product, id);
+            buffer.produce(product, id);
             
             try {
                 Thread.sleep(sleepProductores2);

@@ -9,13 +9,12 @@ import java.util.logging.Logger;
 public class Buffer {
     //Inicializacion de valores
     private final BlockingQueue<String> buffer;
-    private GUIFrame gui;
-    private int Size;
+    private final GUIFrame gui;
     //Constructor
     Buffer(int tamanoBuf, GUIFrame gui) {
         this.buffer = new ArrayBlockingQueue<>(tamanoBuf);
         this.gui = gui;
-        this.Size = tamanoBuf;
+        
     }
   
     //Funcion sincronizada con Consumer
@@ -28,13 +27,14 @@ public class Buffer {
                 Logger.getLogger(Buffer.class.getName()).log(Level.SEVERE, null, ex);
             }
         }
-        //Checar
+        //remover la cola del array
         product = this.buffer.remove();
         
         //Retorno del producto
         String result = PrefixEvaluation(product);
         //Setear la tabla de Producer
         gui.TareasRealizadas(id, product, result);
+        gui.completarTareaPorHacer();
         
         Buffer.print("Consumer consumed: " + product);
         notify();

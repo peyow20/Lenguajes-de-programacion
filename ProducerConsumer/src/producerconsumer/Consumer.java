@@ -12,7 +12,7 @@ public class Consumer extends Thread {
     private final int sleepConsumidores,idConsu;
     private boolean stop;
     //Constructor de Consumer
-    Consumer(Buffer buffer, int idConsu, int sleepConsumidores) {
+    Consumer(Buffer buffer, int sleepConsumidores, int idConsu) {
         this.buffer = buffer;
         this.sleepConsumidores = sleepConsumidores;
         this.idConsu = idConsu; 
@@ -25,7 +25,7 @@ public class Consumer extends Thread {
 
         while (stop) {
             //Llama el metodo de consume en la clase Buffer
-            this.buffer.consume(idConsu);
+            buffer.consume(idConsu);
             try {
                 Thread.sleep(sleepConsumidores);
             } catch (InterruptedException ex) {
